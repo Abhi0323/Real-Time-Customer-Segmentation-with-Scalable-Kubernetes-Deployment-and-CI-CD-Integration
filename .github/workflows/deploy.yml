@@ -18,10 +18,11 @@ jobs:
       with:
         install: true
 
-    - name: Create and use Docker builder
+    - name: Create and inspect builder
       run: |
         docker buildx create --name mybuilder --driver docker-container --use
         docker buildx inspect mybuilder --bootstrap
+        docker buildx ls
 
     - name: Log in to Azure Container Registry
       uses: azure/docker-login@v1
@@ -48,6 +49,11 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         cluster-name: CusSeg
         resource-group: Customer_Seg_Deployment
+
+    - name: Deploy to AKS
+      run: |
+        kubectl set image deployment/fastapi-app fastapi-container=${{ secrets.AZURE_ACR_LOGIN_SERVER }}/myfastapiapp:latest
+        kubectl rollout status deployment/fastapi-apployment
 
     - name: Deploy to AKS
       run: |
