@@ -53,9 +53,4 @@ jobs:
     - name: Deploy to AKS
       run: |
         kubectl set image deployment/fastapi-app fastapi-container=${{ secrets.AZURE_ACR_LOGIN_SERVER }}/myfastapiapp:latest
-        kubectl rollout status deployment/fastapi-apployment
-
-    - name: Deploy to AKS
-      run: |
-        kubectl set image deployment/fastapi-app fastapi-container=${{ secrets.AZURE_ACR_LOGIN_SERVER }}/myfastapiapp:latest
         kubectl rollout status deployment/fastapi-app
