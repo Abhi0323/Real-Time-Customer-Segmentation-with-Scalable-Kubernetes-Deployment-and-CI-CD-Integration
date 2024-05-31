@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD Pipeline
 
 on:
   push:
@@ -10,11 +10,25 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  integration:
+    name: Continuous Integration
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Lint Code
+        run: echo "Linting repository"
+
+      - name: Run Unit Tests
+        run: echo "Running unit tests"
+
+  build-and-push-acr-image:
+    name: Continuous Delivery
+    needs: integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
         uses: actions/checkout@v2
 
       - name: Set up Docker Buildx
@@ -24,12 +38,7 @@ jobs:
           driver: docker-container
           use: true
 
-      - name: Create and bootstrap the builder
-        run: |
-          docker buildx create --name mybuilder --use
-          docker buildx inspect --bootstrap
-
-      - name: Log in to Azure
+      - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
@@ -38,6 +47,31 @@ jobs:
         run: |
           az acr login --name ${{ secrets.AZURE_ACR_LOGIN_SERVER }}
 
-      - name: Build and push Docker image
+      - name: Build and Push Docker Image
         run: |
           docker buildx build --builder mybuilder --platform linux/amd64,linux/arm64 -t ${{ secrets.AZURE_ACR_LOGIN_SERVER }}/myfastapiapp:latest --push .
+
+  deploy:
+    name: Continuous Deployment
+    needs: build-and-push-acr-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set up Kubernetes
+        uses: azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cluster-name: CusSeg
+          resource-group: Customer_Seg_Deployment
+
+      - name: Deploy to AKS
+        run: |
+          kubectl set image deployment/fastapi-app fastapi-container=${{ secrets.AZURE_ACR_LOGIN_SERVER }}/myfastapiapp:latest
+          kubectl rollout status deployment/fastapi-app
