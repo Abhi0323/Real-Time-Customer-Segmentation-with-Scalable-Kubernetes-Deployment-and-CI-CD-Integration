@@ -6,3 +6,5 @@
 ## Current Status:
 
 * In Progress: Currently working on setting up the CI/CD pipeline, containerizing the application, and deploying it to Azure Kubernetes Service (AKS) for scalability and efficient management.
+
+* END to END ML Application
