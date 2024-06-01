@@ -12,17 +12,18 @@ Customer segmentation is vital for businesses to understand and address the dive
 
 The project workflow includes several interconnected components:
 
-### 1. Data Ingestion: Load and prepare the customer dataset for analysis.
-### 2. Data Transformation: Clean and preprocess the data to make it suitable for model training.
-### 3. Model Training: Utilize the K-Means clustering algorithm to segment customers and determine the optimal number of clusters using the Elbow Method.
-### 4. Real-Time Inference with FastAPI: Develop a REST API using FastAPI to serve the model and provide real-time predictions.
-### 5. Containerization with Docker: Use Docker to containerize the FastAPI application, ensuring consistent deployment across various environments.
-### 6. Deployment with Kubernetes: Deploy the containerized application to a Kubernetes cluster for scalability and high availability.
-### 7. CI/CD Pipeline with GitHub Actions: Automate the build and deployment process using GitHub Actions, enabling continuous integration and continuous deployment.
-### 8. Testing: Verify the model's performance and accuracy using Postman for API endpoint testing and a Gradio interface hosted on Hugging Face Spaces for user-friendly testing.
+* **1. Data Ingestion:** Load and prepare the customer dataset for analysis.
+* **2. Data Transformation:** Clean and preprocess the data to make it suitable for model training.
+* **3. Model Training:** Utilize the K-Means clustering algorithm to segment customers and determine the optimal number of clusters using the Elbow Method.
+* **4. Real-Time Inference with FastAPI:** Develop a REST API using FastAPI to serve the model and provide real-time predictions.
+* **5. Containerization with Docker:** Use Docker to containerize the FastAPI application, ensuring consistent deployment across various environments.
+* **6. Deployment with Kubernetes:** Deploy the containerized application to a Kubernetes cluster for scalability and high availability.
+* **7. CI/CD Pipeline with GitHub Actions:** Automate the build and deployment process using GitHub Actions, enabling continuous integration and continuous deployment.
+* **8. Testing:** Verify the model's performance and accuracy using Postman for API endpoint testing and a Gradio interface hosted on Hugging Face Spaces for user-friendly testing.
 
 ## Project Structure
 
+```
 .
 ├── .github/workflows       # GitHub Actions workflows
 │   └── deploy.yml
@@ -37,6 +38,7 @@ The project workflow includes several interconnected components:
 ├── requirements.txt        # Python dependencies
 ├── main.py                 # FastAPI application
 └── README.md               # Project description
+```
 
 ## Key Technologies
 
