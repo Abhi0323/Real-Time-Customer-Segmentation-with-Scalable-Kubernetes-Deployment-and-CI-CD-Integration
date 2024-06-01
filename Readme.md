@@ -1,5 +1,7 @@
 # Scalable ML Model with Real-Time Inference Endpoint for Customer Segmentation
 
+![kuber_doc_seg](https://github.com/Abhi0323/Real-Time-Customer-Segmentation-with-Scalable-Kubernetes-Deployment-and-CI-CD-Integration/assets/112967999/099442ac-08ae-4dc7-92cd-79c871e25e35)
+
 ## Overview:
 
 This repository showcases the development of a scalable machine learning model for customer segmentation, capable of handling real-time inference through a REST API. The project tackles the business challenge of segmenting customers using unstructured data to create tailored marketing strategies. The solution incorporates complex workflows such as data ingestion, transformation, model training, and deployment, leveraging modern tools like FastAPI, Docker, Kubernetes, and GitHub Actions.
@@ -51,7 +53,13 @@ The project workflow includes several interconnected components:
 ## Testing
 
 * Postman: Utilized for testing the API endpoints.
+  
+  <img width="1459" alt="Screenshot 2024-05-31 at 10 26 47 AM" src="https://github.com/Abhi0323/Real-Time-Customer-Segmentation-with-Scalable-Kubernetes-Deployment-and-CI-CD-Integration/assets/112967999/21156ce5-46d6-4291-bf65-99d6fad0a314">
+
 * Gradio Interface: Developed a user-friendly interface hosted on Hugging Face Spaces to test the model in real-time.
+
+  <img width="1449" alt="Screenshot 2024-05-31 at 5 40 12 PM" src="https://github.com/Abhi0323/Real-Time-Customer-Segmentation-with-Scalable-Kubernetes-Deployment-and-CI-CD-Integration/assets/112967999/a733ff45-df63-4866-96f1-7367f1c24708">
+
   
 ## Conclusion
 
